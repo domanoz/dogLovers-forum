@@ -1,0 +1,32 @@
+{
+  "name": "doglovers",
+  "version": "1.0.0",
+  "description": "Forum for dog owners",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "start:prod": "NODE_ENV=production nodemon server.js",
+    "debug": "ndb server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/domanoz/dogLovers-forum.git"
+  },
+  "author": "Mikołaj Domański",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/domanoz/dogLovers-forum/issues"
+  },
+  "homepage": "https://github.com/domanoz/dogLovers-forum#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.12",
+    "morgan": "^1.9.1",
+    "slugify": "^1.3.6",
+    "validator": "^12.1.0"
+  },
+  "devDependencies": {
+    "prettier": "^1.19.1"
+  }
+}
