@@ -74,10 +74,15 @@ exports.protectRoutes = catchAsync(async (req, res, next) => {
   console.log(decoded);
 
   const checkUser = await User.findById(decoded.id);
-
   if (!checkUser) {
     return next(new AppError('User belonging to this token doesnt exist', 401));
   }
 
+  if (checkUser.changedPassword(decode.iat)) {
+    return next(new AppError('User changed password. Log in again.', 401));
+  }
+
+  //Got access to protected routes
+  req.user = checkUser;
   next();
 });
