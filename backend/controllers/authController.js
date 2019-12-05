@@ -15,6 +15,7 @@ exports.signup = catchAsync(async (req, res) => {
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
+    role: req.body.role,
     confirmPassword: req.body.confirmPassword,
     passwordChangedAt: req.body.passwordChangedAt
   });
@@ -86,3 +87,14 @@ exports.protectRoutes = catchAsync(async (req, res, next) => {
   req.user = checkUser;
   next();
 });
+
+exports.restrictTo = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new AppError('You do not have permission to do this action!', 403)
+      );
+    }
+    next();
+  };
+};
