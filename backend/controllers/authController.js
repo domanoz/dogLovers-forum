@@ -15,7 +15,8 @@ exports.signup = catchAsync(async (req, res) => {
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
-    confirmPassword: req.body.confirmPassword
+    confirmPassword: req.body.confirmPassword,
+    passwordChangedAt: req.body.passwordChangedAt
   });
 
   const token = signToken(newUser._id);
@@ -69,16 +70,15 @@ exports.protectRoutes = catchAsync(async (req, res, next) => {
     );
   }
   //Verify token
-
+  //check if payload wasnt manipulated
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-  console.log(decoded);
 
   const checkUser = await User.findById(decoded.id);
   if (!checkUser) {
     return next(new AppError('User belonging to this token doesnt exist', 401));
   }
 
-  if (checkUser.changedPassword(decode.iat)) {
+  if (checkUser.changedPassword(decoded.iat)) {
     return next(new AppError('User changed password. Log in again.', 401));
   }
 
