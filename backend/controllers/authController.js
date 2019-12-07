@@ -11,7 +11,17 @@ const signToken = id => {
     expiresIn: process.env.JWT_EXPIRES_IN
   });
 };
+const createAndSendToken = (user, statusCode, res) => {
+  const token = signToken(user._id);
 
+  res.status(statusCode).json({
+    status: 'success',
+    token,
+    data: {
+      user
+    }
+  });
+};
 exports.signup = catchAsync(async (req, res) => {
   const newUser = await User.create({
     name: req.body.name,
@@ -22,15 +32,7 @@ exports.signup = catchAsync(async (req, res) => {
     passwordChangedAt: req.body.passwordChangedAt
   });
 
-  const token = signToken(newUser._id);
-
-  res.status(201).json({
-    status: 'success',
-    token,
-    data: {
-      user: newUser
-    }
-  });
+  createAndSendToken(newUser, 201, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -47,13 +49,7 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError('Invalid email or password', 401));
   }
 
-  const token = signToken(user._id);
-
-  //send token to user
-  res.status(200).json({
-    status: 'success',
-    token
-  });
+  createAndSendToken(user, 200, res);
 });
 
 exports.protectRoutes = catchAsync(async (req, res, next) => {
@@ -161,11 +157,19 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   await user.save();
 
-  const token = signToken(user._id);
+  createAndSendToken(user, 200, res);
+});
 
-  //send token to user
-  res.status(200).json({
-    status: 'success',
-    token
-  });
+exports.changePassword = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user.id).select('+password');
+
+  if (!user.correctPassword(req.body.currentPassword, user.password)) {
+    return next(new AppError('Your current password is wrong!', 401));
+  }
+  user.password = req.body.password;
+  user.confirmPassword = req.body.confirmPassword;
+
+  await user.save();
+
+  createAndSendToken(user, 200, res);
 });
