@@ -6,7 +6,7 @@ const groupSchema = new mongoose.Schema({
   members: [
     {
       user: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.ObjectId,
         ref: 'User'
       }
     }
@@ -14,7 +14,7 @@ const groupSchema = new mongoose.Schema({
   posts: [
     {
       post: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.ObjectId,
         ref: 'Post'
       }
     }
