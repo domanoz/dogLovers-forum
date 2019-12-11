@@ -1,17 +1,22 @@
 const mongoose = require('mongoose');
 const User = require('./userModel');
+const Group = require('./groupModel');
 
 const postSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.ObjectId,
     ref: 'User'
   },
+  group: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Group'
+  },
+  title: {
+    type: String
+  },
   text: {
     type: String,
     required: true
-  },
-  name: {
-    type: String
   },
   avatar: {
     type: String

@@ -7,6 +7,8 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 
 const userRouter = require('./routes/userRoutes');
+const groupRouter = require('./routes/groupRoutes');
+const postRouter = require('./routes/postRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
@@ -48,6 +50,8 @@ app.use(
 // });
 
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/groups', groupRouter);
+app.use('/api/v1/posts', postRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

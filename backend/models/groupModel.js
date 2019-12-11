@@ -5,20 +5,18 @@ const groupSchema = new mongoose.Schema({
   name: { type: String, required: [true, 'Group must have a name !'] },
   members: [
     {
-      user: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'User'
-      }
-    }
-  ],
-  posts: [
-    {
-      post: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'Post'
-      }
+      type: mongoose.Schema.ObjectId,
+      ref: 'User'
     }
   ]
+});
+
+groupSchema.pre(/^find/, function(next) {
+  this.populate({
+    path: 'members',
+    select: '-__v -passwordChangedAt'
+  });
+  next();
 });
 
 const Group = new mongoose.model('Group', groupSchema);
