@@ -3,7 +3,10 @@ const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 
 exports.getAllGroups = catchAsync(async (req, res, next) => {
-  const groups = await Group.find();
+  const groups = await Group.find().populate({
+    path: 'posts',
+    select: '_id'
+  });
 
   res.status(200).json({
     status: 'success',
@@ -14,7 +17,7 @@ exports.getAllGroups = catchAsync(async (req, res, next) => {
 });
 
 exports.getGroup = catchAsync(async (req, res, next) => {
-  const group = await Group.findById(req.params.id);
+  const group = await Group.findById(req.params.id).populate('posts');
 
   res.status(200).json({
     status: 'success',

@@ -1,8 +1,11 @@
 const express = require('express');
 const groupController = require('./../controllers/groupController');
 const authController = require('./../controllers/authController');
+const postRouter = require('./postRoutes');
 
 const router = new express.Router();
+
+router.use('/:groupId/posts', postRouter);
 
 router
   .route('/')
