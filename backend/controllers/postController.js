@@ -6,7 +6,10 @@ exports.getAllPosts = catchAsync(async (req, res, next) => {
   let filter = {};
   if (req.params.groupId) filter = { group: req.params.groupId };
 
-  const posts = await Post.find(filter);
+  const posts = await Post.find(filter).populate({
+    path: 'comments',
+    select: '_id'
+  });
 
   res.status(200).json({
     status: 'success',
@@ -15,7 +18,10 @@ exports.getAllPosts = catchAsync(async (req, res, next) => {
 });
 
 exports.getPost = catchAsync(async (req, res, next) => {
-  const post = await Post.findById(req.params.id);
+  const post = await Post.findById(req.params.id).populate({
+    path: 'comments',
+    select: '-__v'
+  });
 
   res.status(200).json({
     status: 'success',

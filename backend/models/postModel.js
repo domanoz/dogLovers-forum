@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const User = require('./userModel');
 const Group = require('./groupModel');
+const Comment = require('./commentModel');
 
 const postSchema = new mongoose.Schema(
   {
@@ -33,28 +34,6 @@ const postSchema = new mongoose.Schema(
         }
       }
     ],
-    comments: [
-      {
-        user: {
-          type: mongoose.Schema.ObjectId,
-          ref: 'User'
-        },
-        text: {
-          type: String,
-          required: true
-        },
-        name: {
-          type: String
-        },
-        avatar: {
-          type: String
-        },
-        date: {
-          type: Date,
-          default: Date.now
-        }
-      }
-    ],
     date: {
       type: Date,
       default: Date.now
@@ -65,6 +44,12 @@ const postSchema = new mongoose.Schema(
     toObject: { virtuals: true }
   }
 );
+
+postSchema.virtual('comments', {
+  ref: 'Comment',
+  foreignField: 'post',
+  localField: '_id'
+});
 
 postSchema.pre(/^find/, function(next) {
   this.populate({
