@@ -1,0 +1,16 @@
+.groupname-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #1a1a1b;
+  font-size: 0.7rem;
+  font-weight: bold;
+  min-width: 5rem;
+}
+
+.groupname-item a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #1a1a1b;
+}

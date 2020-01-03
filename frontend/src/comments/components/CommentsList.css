@@ -1,0 +1,14 @@
+.comments-list {
+  flex: 2.5;
+  list-style: none;
+  padding: 0;
+  max-width: 50rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.commentslist-item__content {
+  margin: 2rem;
+}

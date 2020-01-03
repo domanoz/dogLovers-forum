@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const User = require('./userModel');
 const Post = require('./postModel');
 
-const commentModel = mongoose.Schema(
+const commentSchema = mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.ObjectId,
@@ -32,6 +32,14 @@ const commentModel = mongoose.Schema(
   }
 );
 
-const Comment = mongoose.model('Comment', commentModel);
+commentSchema.pre(/^find/, function(next) {
+  this.populate({
+    path: 'user',
+    select: 'name'
+  });
+  next();
+});
+
+const Comment = mongoose.model('Comment', commentSchema);
 
 module.exports = Comment;

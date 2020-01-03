@@ -1,0 +1,13 @@
+.posts-list {
+  flex: 2.5;
+  list-style: none;
+  padding: 0;
+  max-width: 50rem;
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+}
+
+.posts-list__likes {
+  margin: 1rem;
+}

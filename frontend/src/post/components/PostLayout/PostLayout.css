@@ -1,0 +1,45 @@
+.postlayout-item {
+  margin: 1rem;
+  width: 70%;
+  min-width: 17.5rem;
+}
+
+.postlayout__h2_user {
+  font-size: 0.8rem;
+  margin: 0 0 0.5rem 0;
+  font-weight: normal;
+  color: #1a1a1b;
+}
+
+.postlayout-item__content {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  flex-wrap: wrap;
+  text-align: center;
+}
+.postlayout-item__image {
+  width: 4rem;
+  height: 4rem;
+  margin-right: 1rem;
+}
+
+.postlayout-item__info h2 {
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem 0;
+  font-weight: bold;
+  color: #1a1a1b;
+}
+.postlayout__h2_text {
+  font-size: 0.8rem;
+  margin: 0 0 0.5rem 0;
+  font-weight: normal;
+  color: #1a1a1b;
+}
+
+.postlayout-item__likes {
+  margin: 0.5rem;
+  padding: 0;
+}

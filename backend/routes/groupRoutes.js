@@ -16,6 +16,7 @@ router
     groupController.createGroup
   );
 
+router.route('/members').get(groupController.getMembers);
 router.route('/:id').get(groupController.getGroup);
 
 module.exports = router;

@@ -1,0 +1,25 @@
+.grouplist_container {
+  display: flex;
+  margin: 2rem 0;
+  /* justify-content: center; */
+  flex-direction: column;
+  align-content: center;
+}
+
+.group-list {
+  display: flex;
+  list-style: none;
+  padding: 1rem;
+  justify-content: center;
+  align-self: flex-start;
+  border-radius: 20px;
+  border: 0.4px solid #707070;
+  flex-direction: column;
+  background-color: #ffffff;
+  font-weight: bold;
+}
+
+.group-list__header {
+  align-self: center;
+  font-weight: bold;
+}

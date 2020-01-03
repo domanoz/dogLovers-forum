@@ -1,0 +1,11 @@
+.likes-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #1a1a1b;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+.likes-item__image {
+  height: 2rem;
+}
