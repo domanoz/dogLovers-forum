@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./TopGroups.css";
 import TopGroupsItem from "./TopGroupsItem";
 import Button from "./../../shared/components/FormElements/Button";
@@ -12,7 +13,9 @@ const TopGroups = props => {
           <TopGroupsItem key={item.id} group={item} />
         ))}
       </ul>
-      <Button inverse>SEE ALL GROUPS</Button>
+      <Link to="/groups">
+        <Button inverse>SEE ALL GROUPS</Button>
+      </Link>
     </div>
   );
 };

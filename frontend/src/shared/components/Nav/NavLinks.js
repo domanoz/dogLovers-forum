@@ -14,13 +14,7 @@ const NavLinks = props => {
           groups
         </NavLink>
       </li>
-      {auth.isLoggedIn && (
-        <li>
-          <NavLink to="/newPost" exact>
-            new post
-          </NavLink>
-        </li>
-      )}
+
       {!auth.isLoggedIn && (
         <li>
           <NavLink to="/login" exact>

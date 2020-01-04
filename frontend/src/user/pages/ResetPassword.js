@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-
-import "./Signup.css";
+import { useParams } from "react-router-dom";
+import "./ResetPassword.css";
 import Input from "./../../shared/components/FormElements/Input";
 import Button from "./../../shared/components/FormElements/Button";
 import ErrorModal from "./../../shared/components/UIElements/ErrorModal";
@@ -10,32 +10,20 @@ import { useForm } from "./../../shared/hooks/form-hook";
 import { AuthContext } from "./../../shared/context/auth-context";
 import { useHttp } from "./../../shared/hooks/http-hook";
 
-import {
-  VALIDATOR_REQUIRE,
-  VALIDATOR_MINLENGTH,
-  VALIDATOR_EMAIL
-} from "./../../shared/utils/validators";
+import { VALIDATOR_MINLENGTH } from "./../../shared/utils/validators";
 
-const Signup = props => {
+const ResetPassword = props => {
   const auth = useContext(AuthContext);
-
+  const token = useParams().token;
   const { isLoading, error, sendRequest, clearError } = useHttp();
 
   const [formState, inputHandler] = useForm(
     {
-      name: {
-        value: "",
-        isValid: false
-      },
-      email: {
-        value: "",
-        isValid: false
-      },
       password: {
         value: "",
         isValid: false
       },
-      confirmpassword: {
+      confirmPassword: {
         value: "",
         isValid: false
       }
@@ -43,25 +31,19 @@ const Signup = props => {
     false
   );
 
-  const signupSubmitHandler = async event => {
+  const resetPasswordSubmitHandler = async event => {
     event.preventDefault();
-
     try {
       const responseData = await sendRequest(
-        "http://localhost:8000/api/v1/users/signup",
-
-        "POST",
+        `http://localhost:8000/api/v1/users/resetPassword/${token}`,
+        "PATCH",
         JSON.stringify({
-          name: formState.inputs.name.value,
-          email: formState.inputs.email.value,
           password: formState.inputs.password.value,
-          confirmPassword: formState.inputs.confirmpassword.value
+          confirmPassword: formState.inputs.confirmPassword.value
         }),
-        {
-          "Content-Type": "application/json"
-        }
+        { "Content-Type": "application/json" }
       );
-
+      console.log(responseData);
       auth.login(responseData.data.user._id, responseData.token);
     } catch (err) {}
   };
@@ -70,25 +52,7 @@ const Signup = props => {
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
       {isLoading && <LoadingSpinner asOverlay />}
-      <form className="signup-form" onSubmit={signupSubmitHandler}>
-        <Input
-          id="name"
-          element="input"
-          type="text"
-          label="Name"
-          validators={[VALIDATOR_REQUIRE()]}
-          errorText="Please enter a valid name"
-          onInput={inputHandler}
-        />
-        <Input
-          id="email"
-          element="input"
-          type="email"
-          label="E-mail"
-          validators={[VALIDATOR_REQUIRE(), VALIDATOR_EMAIL()]}
-          errorText="Please enter a valid email"
-          onInput={inputHandler}
-        />
+      <form className="resetPass-form" onSubmit={resetPasswordSubmitHandler}>
         <Input
           id="password"
           element="input"
@@ -99,21 +63,21 @@ const Signup = props => {
           onInput={inputHandler}
         />
         <Input
-          id="confirmpassword"
+          id="confirmPassword"
           element="input"
           type="password"
-          label="ConfirmPassword"
-          validators={[VALIDATOR_REQUIRE()]}
-          errorText="Confirm password!"
+          label="Confirm Password"
+          validators={[VALIDATOR_MINLENGTH(8)]}
+          errorText="Confirm your password!"
           onInput={inputHandler}
         />
 
         <Button type="submit" disabled={!formState.isValid}>
-          SIGN UP
+          RESET
         </Button>
       </form>
     </React.Fragment>
   );
 };
 
-export default Signup;
+export default ResetPassword;

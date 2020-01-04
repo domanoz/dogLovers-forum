@@ -1,0 +1,15 @@
+.groups-list {
+  display: flex;
+  padding: 0;
+  justify-content: center;
+  /* flex-direction: row; */
+}
+.allgroup-item {
+  display: flex;
+  flex-direction: column;
+  max-width: 10rem;
+  flex: 1;
+}
+.allgroup-item__card {
+  min-width: 8rem;
+}

@@ -4,6 +4,13 @@ const authController = require('./../controllers/authController');
 
 const router = new express.Router();
 
+router.get(
+  '/me',
+  authController.protectRoutes,
+  userController.getMe,
+  userController.getUser
+);
+
 router
   .route('/')
   .get(

@@ -1,8 +1,8 @@
 .comments-list {
-  flex: 2.5;
+  /* flex: 2.5; */
   list-style: none;
   padding: 0;
-  max-width: 50rem;
+
   display: flex;
   justify-content: center;
   align-items: center;

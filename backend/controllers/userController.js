@@ -29,6 +29,20 @@ exports.updateDataForAuthUser = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getMe = catchAsync(async (req, res, next) => {
+  req.params.id = req.user.id;
+  next();
+});
+
+exports.getUser = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  res.status(200).json({
+    status: 'success',
+    data: user
+  });
+});
+
 exports.deleteAccount = catchAsync(async (req, res, next) => {
   await User.findByIdAndUpdate(req.user.id, { active: false });
 

@@ -28,7 +28,7 @@ const Post = props => {
     };
     fetchData();
   }, [sendRequest, postId, groupId]);
-  console.log(loadedData);
+  // console.log(loadedData);
 
   return (
     <React.Fragment>

@@ -1,5 +1,6 @@
 const express = require('express');
 const postController = require('./../controllers/postController');
+const userController = require('./../controllers/userController');
 const authController = require('./../controllers/authController');
 const commentRouter = require('./commentRoutes');
 
@@ -12,12 +13,32 @@ router.use('/:postId/comments', commentRouter);
 router
   .route('/')
   .get(postController.getAllPosts)
-  .post(
+  .post(authController.protectRoutes, postController.createPost);
+
+router
+  .route('/me')
+  .get(
     authController.protectRoutes,
-    authController.restrictTo('user', 'admin'),
-    postController.createPost
+    userController.getMe,
+    postController.userPosts
   );
 
-router.route('/:id').get(postController.getPost);
+router
+  .route('/:id')
+  .get(postController.getPost)
+  .post(authController.protectRoutes, postController.createPost)
+  .delete(authController.protectRoutes, postController.deletePost);
+
+router
+  .route('/like/:id')
+  .post(authController.protectRoutes, postController.likePost);
+
+router
+  .route('/unlike/:id')
+  .post(authController.protectRoutes, postController.unlikePost);
+
+router
+  .route('/update/:id')
+  .patch(authController.protectRoutes, postController.updatePost);
 
 module.exports = router;

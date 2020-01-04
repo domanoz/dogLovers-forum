@@ -12,4 +12,13 @@ router
     commentController.createComment
   );
 
+router
+  .route('/:id')
+  .delete(authController.protectRoutes, commentController.deleteComment)
+  .get(commentController.getComment);
+
+router
+  .route('/update/:id')
+  .patch(authController.protectRoutes, commentController.updateComment);
+
 module.exports = router;

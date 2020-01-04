@@ -9,3 +9,8 @@
 .likes-item__image {
   height: 2rem;
 }
+.likes-item button {
+  border: none;
+  background-color: #e8e8e8;
+  cursor: pointer;
+}

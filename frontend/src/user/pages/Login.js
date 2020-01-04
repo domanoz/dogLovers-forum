@@ -47,8 +47,9 @@ const Login = props => {
         }),
         { "Content-Type": "application/json" }
       );
-      console.log(responseData);
-      auth.login();
+
+      auth.login(responseData.data.user._id, responseData.token);
+      // console.log(responseData.data.user + " TOKEN : " + responseData.token);
     } catch (err) {}
   };
 
@@ -78,6 +79,9 @@ const Login = props => {
 
         <Button type="submit" disabled={!formState.isValid}>
           LOG IN
+        </Button>
+        <Button to="/users/forgotPassword" inverse>
+          FORGOT PASSWORD?
         </Button>
       </form>
     </React.Fragment>

@@ -1,29 +1,30 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import GroupLayout from "./../components/GroupLayout";
-import { useHttp } from "../../shared/hooks/http-hook";
+import React, { useState, useEffect } from "react";
+
+import AllGroupsLayout from "./../components/AllGroupsLayout/AllGroupsLayout";
+
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 
-const Group = props => {
+import { useHttp } from "../../shared/hooks/http-hook";
+
+const AllGroups = props => {
   const { isLoading, error, sendRequest, clearError } = useHttp();
   const [loadedData, setLoadedData] = useState();
-
-  const groupId = useParams().groupId;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/v1/groups/${groupId}`
+          `http://localhost:8000/api/v1/groups/`
         );
 
-        setLoadedData(responseData.data);
+        setLoadedData(responseData.data.groups);
       } catch (err) {}
     };
     fetchData();
-  }, [sendRequest, groupId]);
+  }, [sendRequest]);
   // console.log(loadedData);
+
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
@@ -32,9 +33,9 @@ const Group = props => {
           <LoadingSpinner />
         </div>
       )}
-      {!isLoading && loadedData && <GroupLayout items={loadedData} />}
+      {!isLoading && loadedData && <AllGroupsLayout groups={loadedData} />}
     </React.Fragment>
   );
 };
 
-export default Group;
+export default AllGroups;

@@ -4,7 +4,7 @@
   border: 1px solid #707070;
   border-radius: 4px;
   background: #ffffff;
-  color: white;
+  color: 707070;
   cursor: pointer;
 
   /* margin-right: 1rem; */
@@ -18,7 +18,7 @@
 
 .button:hover,
 .button:active {
-  background: #ffffff;
+  background: #707070;
   border-color: #ffffff;
 }
 
@@ -34,25 +34,31 @@
 }
 
 .button--danger {
-  background: #830000;
-  border-color: #830000;
+  margin: 0.3rem;
+  background: #bf8585;
+  border-color: #bf8585;
 }
 
 .button--danger:hover,
 .button--danger:active {
-  background: #f34343;
-  border-color: #f34343;
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #bf8585;
 }
 
 .button:disabled,
 .button:hover:disabled,
 .button:active:disabled {
-  background: #f34343;
-  color: #e8e8e8;
+  background: hsl(0, 2%, 48%);
+  color: #20202a;
   border-color: #e8e8e8;
   cursor: not-allowed;
 }
 
+.button--vsmall {
+  padding: 2px;
+  font-size: 0.5rem;
+}
 .button--small {
   font-size: 0.8rem;
 }

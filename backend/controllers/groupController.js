@@ -10,7 +10,7 @@ exports.getAllGroups = catchAsync(async (req, res, next) => {
     //   select: '_id'
     // }
   );
-  console.log(groups);
+  // console.log(groups);
   res.status(200).json({
     status: 'success',
     data: {

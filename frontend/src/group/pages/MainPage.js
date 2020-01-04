@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import GroupLayout from "./../components/GroupLayout";
 import { useHttp } from "../../shared/hooks/http-hook";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
@@ -8,21 +7,20 @@ import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 const Group = props => {
   const { isLoading, error, sendRequest, clearError } = useHttp();
   const [loadedData, setLoadedData] = useState();
-
-  const groupId = useParams().groupId;
+  //5df10b93ace1b1037cf2f752
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/v1/groups/${groupId}`
+          `http://localhost:8000/api/v1/groups/5df10b93ace1b1037cf2f752`
         );
 
         setLoadedData(responseData.data);
       } catch (err) {}
     };
     fetchData();
-  }, [sendRequest, groupId]);
+  }, [sendRequest, props.groupId]);
   // console.log(loadedData);
   return (
     <React.Fragment>

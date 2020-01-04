@@ -1,7 +1,10 @@
 .postlayout-item {
-  margin: 1rem;
+  margin: 1rem auto;
   width: 70%;
   min-width: 17.5rem;
+}
+.postlayout-item button {
+  background-color: #fff;
 }
 
 .postlayout__h2_user {
@@ -14,7 +17,7 @@
 .postlayout-item__content {
   padding: 1rem;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   align-self: center;
   flex-wrap: wrap;
@@ -27,6 +30,7 @@
 }
 
 .postlayout-item__info h2 {
+  /* display: flex; */
   font-size: 1.5rem;
   margin: 0 0 0.5rem 0;
   font-weight: bold;

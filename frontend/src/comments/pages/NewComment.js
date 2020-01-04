@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useParams, useHistory } from "react-router-dom";
 
-import "./NewPost.css";
+import "./NewComment.css";
 import Input from "./../../shared/components/FormElements/Input";
 import Button from "./../../shared/components/FormElements/Button";
 import ErrorModal from "./../../shared/components/UIElements/ErrorModal";
@@ -17,9 +17,10 @@ import {
   VALIDATOR_MAXLENGTH
 } from "./../../shared/utils/validators";
 
-const NewPost = props => {
+const NewComment = props => {
   //const auth = useContext(AuthContext);
   const groupId = useParams().groupId;
+  const postId = useParams().postId;
 
   const { isLoading, error, sendRequest, clearError } = useHttp();
   const storedData = JSON.parse(localStorage.getItem("userData"));
@@ -38,27 +39,14 @@ const NewPost = props => {
     false
   );
   const history = useHistory();
-  const [loadedData, setLoadedData] = useState();
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const responseData = await sendRequest(
-          `http://localhost:8000/api/v1/groups/${groupId}`
-        );
-
-        setLoadedData(responseData.data.group.name);
-      } catch (err) {}
-    };
-    fetchData();
-  }, [sendRequest, groupId]);
 
   // console.log(loadedData);
-  const postSubmitHandler = async event => {
+  const commentSubmitHandler = async event => {
     event.preventDefault();
 
     try {
       await sendRequest(
-        `http://localhost:8000/api/v1/groups/${groupId}/posts`,
+        `http://localhost:8000/api/v1/groups/${groupId}/posts/${postId}/comments`,
         "POST",
         JSON.stringify({
           title: formState.inputs.title.value,
@@ -69,7 +57,7 @@ const NewPost = props => {
           Authorization: "Bearer " + storedData.token
         }
       );
-      history.push(`/groups/${groupId}`);
+      history.push(`/${groupId}/${postId}`);
     } catch (err) {}
   };
 
@@ -77,8 +65,8 @@ const NewPost = props => {
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
       {isLoading && <LoadingSpinner asOverlay />}
-      <div className="center">Posting in group: {loadedData}</div>
-      <form className="post-form" onSubmit={postSubmitHandler}>
+      <div className="center">Answering to post</div>
+      <form className="comment-form" onSubmit={commentSubmitHandler}>
         <Input
           id="title"
           element="input"
@@ -98,11 +86,11 @@ const NewPost = props => {
         />
 
         <Button type="submit" disabled={!formState.isValid}>
-          ADD POST
+          ADD COMMENT
         </Button>
       </form>
     </React.Fragment>
   );
 };
 
-export default NewPost;
+export default NewComment;

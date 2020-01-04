@@ -1,6 +1,7 @@
-.grouplayout_container {
+.profilelayout_container {
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
+  /* flex-direction: column; */
   max-width: 90vw;
 }
