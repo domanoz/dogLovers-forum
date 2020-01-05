@@ -4,12 +4,38 @@
   justify-content: center;
   /* flex-direction: row; */
 }
-.allgroup-item {
+/* .allgroup-item {
   display: flex;
   flex-direction: column;
   max-width: 10rem;
   flex: 1;
-}
+} */
+
 .allgroup-item__card {
   min-width: 8rem;
+}
+.allgroup-item {
+  display: flex;
+  margin: 0.5rem;
+  width: 10%;
+
+  min-width: 10rem;
+  align-items: center;
+  text-align: center;
+}
+
+.allgroup-item a {
+  display: flex;
+  /* padding-left: 1rem; */
+
+  height: 100%;
+  text-decoration: none;
+  align-self: center;
+  color: #1a1a1b;
+}
+
+@media only screen and (max-width: 600px) {
+  .groups-list {
+    flex-wrap: wrap;
+  }
 }

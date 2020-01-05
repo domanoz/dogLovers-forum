@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import "./CommentItem.css";
 import Card from "./../../shared/components/UIElements/Card";
 import Avatar from "./../../shared/components/UIElements/Avatar";
@@ -15,7 +16,7 @@ const CommentItem = props => {
     props.user.avatar =
       "https://images.pexels.com/photos/839011/pexels-photo-839011.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260";
   }
-
+  const history = useHistory();
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttp();
   const storedData = JSON.parse(localStorage.getItem("userData"));
@@ -33,22 +34,23 @@ const CommentItem = props => {
           Authorization: "Bearer " + storedData.token
         }
       );
-      window.location.reload();
+      history.goBack();
     } catch (err) {}
   };
   // console.log(props.group, props.id);
+
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
       {isLoading && <LoadingSpinner asOverlay />}
 
       <li className="comment-item">
-        {auth.userId === props.user._id && (
+        {(auth.userId === props.user._id || auth.isAdmin === "admin") && (
           <Button size="vsmall" onClick={deleteComment} danger>
             DELETE
           </Button>
         )}
-        {auth.userId === props.user._id && (
+        {(auth.userId === props.user._id || auth.isAdmin === "admin") && (
           <Button size="vsmall" to={`/comments/update/${props.id}`} danger>
             EDIT
           </Button>

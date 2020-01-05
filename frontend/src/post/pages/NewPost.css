@@ -2,7 +2,7 @@
   list-style: none;
   margin: 0 auto;
   padding: 1rem;
-  width: 40%;
+  width: 80%;
   max-width: 40rem;
   /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26); */
   border-radius: 6px;
@@ -12,4 +12,10 @@
 .center {
   font-size: 1.5rem;
   margin: 1rem;
+}
+
+@media (min-width: 757px) {
+  .post-form {
+    width: 40%;
+  }
 }

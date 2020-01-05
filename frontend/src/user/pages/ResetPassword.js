@@ -43,8 +43,12 @@ const ResetPassword = props => {
         }),
         { "Content-Type": "application/json" }
       );
-      console.log(responseData);
-      auth.login(responseData.data.user._id, responseData.token);
+      console.log(auth.isAdmin);
+      auth.login(
+        responseData.data.user._id,
+        responseData.token,
+        responseData.data.user.role
+      );
     } catch (err) {}
   };
 

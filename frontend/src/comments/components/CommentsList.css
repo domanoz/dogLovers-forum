@@ -2,13 +2,18 @@
   /* flex: 2.5; */
   list-style: none;
   padding: 0;
-
+  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
 }
-
+.button_comments {
+  margin: 1rem auto;
+}
 .commentslist-item__content {
   margin: 2rem;
+}
+h4 {
+  margin: 0.2rem;
 }

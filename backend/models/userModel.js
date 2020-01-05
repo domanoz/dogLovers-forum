@@ -37,6 +37,7 @@ const userSchema = new mongoose.Schema({
       message: 'Passwords are not the same!'
     }
   },
+
   date: {
     type: Date,
     default: Date.now

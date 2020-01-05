@@ -10,6 +10,7 @@ const Profile = props => {
   const { isLoading, error, sendRequest, clearError } = useHttp();
   const [loadedUserPosts, setLoadedUserPosts] = useState();
   const [loadedUserData, setLoadedUserData] = useState();
+  const [loadedGroupsData, setLoadedGroupsData] = useState();
   const auth = useContext(AuthContext);
 
   useEffect(() => {
@@ -50,6 +51,25 @@ const Profile = props => {
     fetchData();
   }, [sendRequest, auth.token]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responseGroupsData = await sendRequest(
+          `http://localhost:8000/api/v1/groups/me`,
+          "GET",
+          JSON.stringify(),
+          {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + auth.token
+          }
+        );
+
+        setLoadedGroupsData(responseGroupsData.data.groups);
+      } catch (err) {}
+    };
+    fetchData();
+  }, [sendRequest, auth.token]);
+
   // console.log(loadedUserPosts, loadedUserData);
   return (
     <React.Fragment>
@@ -59,8 +79,12 @@ const Profile = props => {
           <LoadingSpinner />
         </div>
       )}
-      {!isLoading && loadedUserPosts && (
-        <ProfileLayout posts={loadedUserPosts} user={loadedUserData} />
+      {!isLoading && loadedUserPosts && loadedUserData && loadedGroupsData && (
+        <ProfileLayout
+          posts={loadedUserPosts}
+          user={loadedUserData}
+          groups={loadedGroupsData}
+        />
       )}
     </React.Fragment>
   );

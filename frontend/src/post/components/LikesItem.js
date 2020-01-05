@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-
+import { useHistory } from "react-router-dom";
 import paw from "./../../img/paw.png";
 import paw_red from "./../../img/paw_red.png";
 import "./LikesItem.css";
@@ -15,7 +15,7 @@ const LikesItem = props => {
   const { isLoading, error, sendRequest, clearError } = useHttp();
 
   const storedData = JSON.parse(localStorage.getItem("userData"));
-
+  const history = useHistory();
   const likeHandler = async event => {
     if (props.userLike) {
       event.preventDefault();
@@ -30,7 +30,7 @@ const LikesItem = props => {
           }
         );
 
-        window.location.reload();
+        history.go(0);
       } catch (err) {}
     } else {
       event.preventDefault();
@@ -45,7 +45,7 @@ const LikesItem = props => {
           }
         );
 
-        window.location.reload();
+        history.go(0);
       } catch (err) {}
     }
   };

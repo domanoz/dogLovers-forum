@@ -10,7 +10,7 @@ const AllGroupsLayout = props => {
   return (
     <ul className="groups-list">
       {props.groups.map(group => (
-        <li key={group.id} className="topgroup-item">
+        <li key={group.id} className="allgroup-item">
           <Link to={`/groups/${group.id}`}>
             <Card className="allgroup-item__card">
               <img src={dog} alt="dog" width="20px" height="20px" />

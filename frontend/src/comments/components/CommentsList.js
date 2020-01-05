@@ -45,6 +45,7 @@ const CommentsList = props => {
           ANSWER TO POST
         </Button>
       )}
+      <h4>COMMENTS</h4>
       <ul className="comments-list">
         {props.post.comments.map(comment => (
           <CommentItem

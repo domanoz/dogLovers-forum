@@ -13,3 +13,8 @@
   font-size: 1.5rem;
   margin: 1rem;
 }
+@media only screen and (max-width: 600px) {
+  .comment-form {
+    width: 90%;
+  }
+}

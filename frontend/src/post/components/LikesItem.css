@@ -5,6 +5,7 @@
   color: #1a1a1b;
   font-size: 1.3rem;
   font-weight: bold;
+  flex: 1;
 }
 .likes-item__image {
   height: 2rem;
@@ -13,4 +14,9 @@
   border: none;
   background-color: #e8e8e8;
   cursor: pointer;
+}
+@media (max-width: 600px) {
+  .likes-item {
+    display: none;
+  }
 }

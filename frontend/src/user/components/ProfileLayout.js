@@ -7,7 +7,7 @@ const ProfileLayout = props => {
   return (
     <div className="profilelayout_container">
       <PostsList items={props.posts} />
-      <ProfileData userData={props.user} />
+      <ProfileData userData={props.user} groupsData={props.groups} />
     </div>
   );
 };

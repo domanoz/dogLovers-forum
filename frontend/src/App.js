@@ -18,6 +18,8 @@ import ForgotPassword from "./user/pages/ForgotPassword";
 import Profile from "./user/pages/Profile";
 import UpdateUserData from "./user/pages/UpdateUserData";
 import ResetPassword from "./user/pages/ResetPassword";
+import NewPassword from "./user/pages/NewPassword";
+import AddDog from "./user/pages/AddDog";
 
 import Login from "./user/pages/Login";
 import Signup from "./user/pages/Signup";
@@ -31,10 +33,16 @@ const App = () => {
   const [token, setToken] = useState(false);
   const [tokenExpirationDate, setTokenExpirationDate] = useState();
   const [userId, setUserId] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(null);
 
-  const login = useCallback((uid, token, expirationDate) => {
+  const login = useCallback((uid, token, role = "user", expirationDate) => {
+    if (role === "admin") setIsAdmin(role);
+
+    // console.log(isAdmin, role);
     setUserId(uid);
     setToken(token);
+
+    // const administration = role || "user";
     const tokenExpirationDate =
       expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60 * 24);
     setTokenExpirationDate(tokenExpirationDate);
@@ -43,6 +51,7 @@ const App = () => {
       JSON.stringify({
         userId: uid,
         token: token,
+        isAdmin: role,
         expiration: tokenExpirationDate.toISOString()
       })
     );
@@ -50,6 +59,7 @@ const App = () => {
 
   const logout = useCallback(() => {
     setToken(null);
+    setIsAdmin(null);
     setTokenExpirationDate(null);
     setUserId(null);
     localStorage.removeItem("userData");
@@ -67,6 +77,7 @@ const App = () => {
 
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem("userData"));
+    // console.log("from app" + storedData.isAdmin);
     if (
       storedData &&
       storedData.token &&
@@ -75,6 +86,7 @@ const App = () => {
       login(
         storedData.userId,
         storedData.token,
+        storedData.isAdmin,
         new Date(storedData.expiration)
       );
     }
@@ -97,6 +109,12 @@ const App = () => {
         </Route>
         <Route path="/users/updateUserData" exact>
           <UpdateUserData />
+        </Route>
+        <Route path="/users/me/addDog" exact>
+          <AddDog />
+        </Route>
+        <Route path="/users/me/changePassword" exact>
+          <NewPassword />
         </Route>
         <Route path="/posts/update/:postId" exact>
           <UpdatePost />
@@ -160,6 +178,7 @@ const App = () => {
     <AuthContext.Provider
       value={{
         isLoggedIn: !!token,
+        isAdmin: isAdmin,
         token: token,
         userId: userId,
         login: login,

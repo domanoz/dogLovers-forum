@@ -30,7 +30,7 @@ const PostsList = props => {
       </div>
     );
   }
-  // console.log(props.items.posts);
+  console.log(auth.isAdmin);
 
   return (
     <div className="posts_container">

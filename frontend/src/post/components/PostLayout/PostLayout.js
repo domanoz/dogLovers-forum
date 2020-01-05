@@ -54,12 +54,12 @@ const PostLayout = props => {
       <ErrorModal error={error} onClear={clearError} />
       {isLoading && <LoadingSpinner asOverlay />}
       <div className="postlayout-item">
-        {auth.userId === props.post.user._id && (
+        {(auth.userId === props.post.user._id || auth.isAdmin === "admin") && (
           <Button size="vsmall" onClick={deletePost} danger>
             DELETE
           </Button>
         )}
-        {auth.userId === props.post.user._id && (
+        {(auth.userId === props.post.user._id || auth.isAdmin === "admin") && (
           <Button size="vsmall" to={`/posts/update/${props.post.id}`} danger>
             EDIT
           </Button>
@@ -78,7 +78,7 @@ const PostLayout = props => {
               width="3rem"
             />
           </div>
-          <div>
+          <div className="cont_content">
             <h2 className="postlayout__h2_user">
               by {props.post.user.name} on {props.post.date}
             </h2>

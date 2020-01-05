@@ -5,6 +5,7 @@
   flex-direction: column;
   align-content: center;
   text-align: center;
+  order: 1;
 }
 
 .group-list {
@@ -24,3 +25,20 @@
   align-self: center;
   font-weight: bold;
 }
+
+@media (min-width: 768px) {
+  .grouplist_container {
+    order: 2;
+  }
+}
+@media (max-width: 600px) {
+  .grouplist_container {
+    order: 1;
+  }
+}
+/*
+@media (max-width: 768px) {
+  .grouplist_container {
+    order: 1;
+  }
+} */

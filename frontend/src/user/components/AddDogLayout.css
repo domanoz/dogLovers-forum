@@ -1,0 +1,26 @@
+h4 {
+  text-align: center;
+}
+.dog-list {
+  display: flex;
+  padding: 0;
+  justify-content: center;
+
+  /* flex-direction: row; */
+}
+.dog-item {
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  max-width: 10rem;
+  flex: 1;
+}
+.dog-item__card {
+  min-width: 8rem;
+}
+
+.button_dog {
+  border: none;
+  background: none;
+  cursor: pointer;
+}

@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 
-import "./Login.css";
+import "./Signup.css";
 import Input from "./../../shared/components/FormElements/Input";
 import Button from "./../../shared/components/FormElements/Button";
 import ErrorModal from "./../../shared/components/UIElements/ErrorModal";
@@ -12,22 +13,26 @@ import { useHttp } from "./../../shared/hooks/http-hook";
 
 import {
   VALIDATOR_REQUIRE,
-  VALIDATOR_MINLENGTH,
-  VALIDATOR_EMAIL
+  VALIDATOR_MINLENGTH
 } from "./../../shared/utils/validators";
 
-const Login = props => {
+const NewPassword = props => {
   const auth = useContext(AuthContext);
 
   const { isLoading, error, sendRequest, clearError } = useHttp();
+  const history = useHistory();
 
   const [formState, inputHandler] = useForm(
     {
-      email: {
+      currentPassword: {
         value: "",
         isValid: false
       },
       password: {
+        value: "",
+        isValid: false
+      },
+      confirmPassword: {
         value: "",
         isValid: false
       }
@@ -35,66 +40,68 @@ const Login = props => {
     false
   );
 
-  const loginSubmitHandler = async event => {
+  const passwordSubmitHandler = async event => {
     event.preventDefault();
     try {
-      const responseData = await sendRequest(
-        "http://localhost:8000/api/v1/users/login",
-        "POST",
+      await sendRequest(
+        "http://localhost:8000/api/v1/users/changePassword",
+        "PATCH",
         JSON.stringify({
-          email: formState.inputs.email.value,
-          password: formState.inputs.password.value
+          currentPassword: formState.inputs.currentPassword.value,
+          password: formState.inputs.password.value,
+          confirmPassword: formState.inputs.confirmPassword.value
         }),
-        { "Content-Type": "application/json" }
+        {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + auth.token
+        }
       );
-      // if(responseData.data.user.role === "admin")
-      // {
-      //   auth.
-      // }
-
-      auth.login(
-        responseData.data.user._id,
-        responseData.token,
-        responseData.data.user.role
-      );
-
+      auth.logout();
+      history.goBack();
+      // auth.login(responseData.data.user._id, responseData.token);
       // console.log(responseData.data.user + " TOKEN : " + responseData.token);
     } catch (err) {}
   };
-  console.log(auth.isAdmin);
+
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
       {isLoading && <LoadingSpinner asOverlay />}
-      <form className="login-form" onSubmit={loginSubmitHandler}>
+      <form className="signup-form" onSubmit={passwordSubmitHandler}>
         <Input
-          id="email"
+          id="currentPassword"
           element="input"
-          type="email"
-          label="E-mail"
-          validators={[VALIDATOR_REQUIRE(), VALIDATOR_EMAIL()]}
-          errorText="Please enter a valid email"
+          type="password"
+          label="Current Password"
+          validators={[VALIDATOR_REQUIRE()]}
+          errorText="Please enter a valid password"
           onInput={inputHandler}
         />
         <Input
           id="password"
           element="input"
           type="password"
-          label="Password"
+          label="New Password"
+          validators={[VALIDATOR_REQUIRE()]}
+          errorText="Please enter a valid password"
+          onInput={inputHandler}
+        />
+        <Input
+          id="confirmPassword"
+          element="input"
+          type="password"
+          label="Confirm Password"
           validators={[VALIDATOR_MINLENGTH(8)]}
-          errorText="Password needs at least 8 letters"
+          errorText="Please enter a valid confirm password"
           onInput={inputHandler}
         />
 
         <Button type="submit" disabled={!formState.isValid}>
-          LOG IN
-        </Button>
-        <Button to="/users/forgotPassword" inverse>
-          FORGOT PASSWORD?
+          CHANGE PASSWORD
         </Button>
       </form>
     </React.Fragment>
   );
 };
 
-export default Login;
+export default NewPassword;

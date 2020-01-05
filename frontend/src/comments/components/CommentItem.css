@@ -1,7 +1,5 @@
 .comment-item {
-  margin: 1rem;
-  /* width: 90%; */
-  min-width: 50rem;
+  flex-basis: 80%;
 }
 
 .comment-item__image {
@@ -15,7 +13,7 @@
   flex-direction: row;
   justify-content: left;
   align-items: center;
-  padding: 1rem;
+  padding: 0.2rem;
   min-width: 8rem;
   max-width: none;
 }
@@ -25,4 +23,16 @@
   margin: 0 0 0.5rem 0;
   font-weight: normal;
   color: #1a1a1b;
+}
+.comment-item__info h3 {
+  font-size: 0.8rem;
+  margin: 0 0 0.5rem 0;
+  font-weight: normal;
+  color: #1a1a1b;
+}
+
+@media only screen and (max-width: 600px) {
+  .comment-item {
+    flex-basis: 100%;
+  }
 }
