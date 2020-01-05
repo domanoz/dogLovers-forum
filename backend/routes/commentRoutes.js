@@ -14,7 +14,11 @@ router
 
 router
   .route('/:id')
-  .delete(authController.protectRoutes, commentController.deleteComment)
+  .delete(
+    authController.protectRoutes,
+    authController.restrictTo('admin', 'moderator'),
+    commentController.deleteComment
+  )
   .get(commentController.getComment);
 
 router

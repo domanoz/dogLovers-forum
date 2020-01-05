@@ -6,7 +6,7 @@ import Card from "./../../shared/components/UIElements/Card";
 import Button from "./../../shared/components/FormElements/Button";
 
 const ProfileData = props => {
-  console.log(props.groupsData.length);
+  // console.log(props.groupsData.length);
 
   return (
     <div className="main_container">

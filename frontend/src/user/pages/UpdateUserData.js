@@ -108,7 +108,7 @@ const UpdateUserData = () => {
       </div>
     );
   }
-  console.log(loadedUser);
+  // console.log(loadedUser);
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />

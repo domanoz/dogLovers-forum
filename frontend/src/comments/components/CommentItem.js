@@ -45,12 +45,16 @@ const CommentItem = props => {
       {isLoading && <LoadingSpinner asOverlay />}
 
       <li className="comment-item">
-        {(auth.userId === props.user._id || auth.isAdmin === "admin") && (
+        {(auth.userId === props.user._id ||
+          auth.isAdmin === "admin" ||
+          auth.isAdmin === "moderator") && (
           <Button size="vsmall" onClick={deleteComment} danger>
             DELETE
           </Button>
         )}
-        {(auth.userId === props.user._id || auth.isAdmin === "admin") && (
+        {(auth.userId === props.user._id ||
+          auth.isAdmin === "admin" ||
+          auth.isAdmin === "moderator") && (
           <Button size="vsmall" to={`/comments/update/${props.id}`} danger>
             EDIT
           </Button>

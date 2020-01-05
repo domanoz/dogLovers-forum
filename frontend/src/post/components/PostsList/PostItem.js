@@ -41,12 +41,16 @@ const PostItem = props => {
       <ErrorModal error={error} onClear={clearError} />
       {isLoading && <LoadingSpinner asOverlay />}
       <div className="post_item__container">
-        {(auth.userId === props.userID || auth.isAdmin === "admin") && (
+        {(auth.userId === props.userID ||
+          auth.isAdmin === "admin" ||
+          auth.isAdmin === "moderator") && (
           <Button size="vsmall" onClick={deletePost} danger>
             DELETE
           </Button>
         )}
-        {(auth.userId === props.userID || auth.isAdmin === "admin") && (
+        {(auth.userId === props.userID ||
+          auth.isAdmin === "admin" ||
+          auth.isAdmin === "moderator") && (
           <Button size="vsmall" to={`/posts/update/${props.postId}`} danger>
             EDIT
           </Button>

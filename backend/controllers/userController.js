@@ -52,6 +52,23 @@ exports.deleteAccount = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.deleteAccountAdmin = catchAsync(async (req, res, next) => {
+  await User.findByIdAndUpdate(req.params.id, { active: false });
+
+  res.status(200).json({
+    status: 'success',
+    data: null
+  });
+});
+exports.unbanAccountAdmin = catchAsync(async (req, res, next) => {
+  await User.findByIdAndUpdate(req.params.id, { active: true });
+
+  res.status(200).json({
+    status: 'success',
+    data: null
+  });
+});
+
 exports.getAllUsers = catchAsync(async (req, res, next) => {
   const users = await User.find();
   //console.log(req.headers);

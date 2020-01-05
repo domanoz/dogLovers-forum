@@ -15,7 +15,7 @@ router
   .route('/')
   .get(
     authController.protectRoutes,
-    authController.restrictTo('admin'),
+    authController.restrictTo('admin', 'moderator'),
     userController.getAllUsers
   );
 
@@ -32,6 +32,19 @@ router.delete(
   '/deleteAccount',
   authController.protectRoutes,
   userController.deleteAccount
+);
+
+router.delete(
+  '/deleteAccount/:id',
+  authController.protectRoutes,
+  authController.restrictTo('admin', 'moderator'),
+  userController.deleteAccountAdmin
+);
+router.patch(
+  '/unbanAccount/:id',
+  authController.protectRoutes,
+  authController.restrictTo('admin', 'moderator'),
+  userController.unbanAccountAdmin
 );
 
 router.post('/forgotPassword', authController.forgotPassword);

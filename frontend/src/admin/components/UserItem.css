@@ -1,0 +1,30 @@
+.user_item__container {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  list-style-type: none;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.user-item {
+  padding: 0.3rem;
+  margin: 0;
+  align-self: center;
+  text-align: center;
+}
+
+.user-item__image {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1rem;
+  margin: 0 auto;
+}
+
+.user-item__info h2 {
+  font-size: 0.8rem;
+  margin: 0 0 0.5rem 0;
+  font-weight: normal;
+  color: #1a1a1b;
+}

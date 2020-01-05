@@ -9,6 +9,7 @@ import {
 import Group from "./group/pages/Group";
 import MainPage from "./group/pages/MainPage";
 import AllGroups from "./group/pages/AllGroups";
+import NewGroup from "./group/pages/NewGroup";
 import Post from "./post/pages/Post";
 import NewPost from "./post/pages/NewPost";
 import UpdatePost from "./post/pages/UpdatePost";
@@ -18,6 +19,7 @@ import ForgotPassword from "./user/pages/ForgotPassword";
 import Profile from "./user/pages/Profile";
 import UpdateUserData from "./user/pages/UpdateUserData";
 import ResetPassword from "./user/pages/ResetPassword";
+import Admin from "./admin/pages/Admin";
 import NewPassword from "./user/pages/NewPassword";
 import AddDog from "./user/pages/AddDog";
 
@@ -36,7 +38,7 @@ const App = () => {
   const [isAdmin, setIsAdmin] = useState(null);
 
   const login = useCallback((uid, token, role = "user", expirationDate) => {
-    if (role === "admin") setIsAdmin(role);
+    if (role === "admin" || role === "moderator") setIsAdmin(role);
 
     // console.log(isAdmin, role);
     setUserId(uid);
@@ -103,9 +105,15 @@ const App = () => {
         <Route path="/me" exact>
           <Profile />
         </Route>
+        <Route path="/admin" exact>
+          <Admin />
+        </Route>
 
         <Route path="/groups" exact>
           <AllGroups />
+        </Route>
+        <Route path="/groups/newGroup" exact>
+          <NewGroup />
         </Route>
         <Route path="/users/updateUserData" exact>
           <UpdateUserData />

@@ -53,6 +53,9 @@ exports.login = catchAsync(async (req, res, next) => {
   }
   //check if user exists
   const user = await User.findOne({ email }).select('+password');
+  if (user.active === false) {
+    return next(new AppError('You have been banned', 401));
+  }
 
   if (!user || !(await user.correctPassword(password, user.password))) {
     return next(new AppError('Invalid email or password', 401));
@@ -105,6 +108,19 @@ exports.restrictTo = (...roles) => {
     next();
   };
 };
+
+exports.checkIfAdmin = catchAsync(async (req, res, next) => {
+  const admin = User.find({ role: 'admin' });
+  // console.log(admin);
+
+  if (req.user._id !== admin._id) {
+    return next(
+      new AppError('You do not have permission to do this action!', 403)
+    );
+  }
+
+  next();
+});
 
 exports.forgotPassword = catchAsync(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });

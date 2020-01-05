@@ -61,7 +61,7 @@ const Login = props => {
       // console.log(responseData.data.user + " TOKEN : " + responseData.token);
     } catch (err) {}
   };
-  console.log(auth.isAdmin);
+  // console.log(auth.isAdmin);
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />

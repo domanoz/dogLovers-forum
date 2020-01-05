@@ -21,7 +21,7 @@ exports.getAllPosts = catchAsync(async (req, res, next) => {
 
 exports.userPosts = catchAsync(async (req, res, next) => {
   let filter = req.params.id;
-  console.log(req.params.id);
+  // console.log(req.params.id);
   if (req.params.id) filter = { user: { _id: req.params.id } };
 
   const posts = await Post.find(filter);
@@ -51,7 +51,7 @@ exports.getPost = catchAsync(async (req, res, next) => {
 exports.likePost = catchAsync(async (req, res, next) => {
   const post = await Post.findById(req.params.id);
   // const { userId } = req.body;
-  console.log(req.user);
+  // console.log(req.user);
   if (
     post.likes.filter(like => like.user.toString() === req.user._id.toString())
       .length > 0

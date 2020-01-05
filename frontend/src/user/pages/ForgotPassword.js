@@ -33,7 +33,7 @@ const ForgotPassword = props => {
   const forgotPasswordSubmitHandler = async event => {
     event.preventDefault();
     try {
-      const responseData = await sendRequest(
+      await sendRequest(
         "http://localhost:8000/api/v1/users/forgotPassword",
         "POST",
         JSON.stringify({
@@ -41,7 +41,7 @@ const ForgotPassword = props => {
         }),
         { "Content-Type": "application/json" }
       );
-      console.log(responseData);
+      // console.log(responseData);
     } catch (err) {}
   };
 

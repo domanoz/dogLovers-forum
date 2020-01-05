@@ -1,4 +1,4 @@
-.forgotPassword-form {
+.group-form {
   list-style: none;
   margin: 0 auto;
   padding: 1rem;
@@ -7,13 +7,14 @@
   /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26); */
   border-radius: 6px;
   background: white;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
 }
 
+.center {
+  font-size: 1.5rem;
+  margin: 1rem;
+}
 @media only screen and (max-width: 600px) {
-  .forgotPassword-form {
+  .group-form {
     width: 90%;
   }
 }

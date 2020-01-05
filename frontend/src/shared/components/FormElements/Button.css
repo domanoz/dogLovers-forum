@@ -4,7 +4,7 @@
   border: 1px solid #707070;
   border-radius: 4px;
   background: #ffffff;
-  color: 707070;
+  color: #707070;
   cursor: pointer;
   margin: 1rem auto;
   /* margin-right: 1rem; */
@@ -18,7 +18,7 @@
 
 .button:hover,
 .button:active {
-  background: #707070;
+  background: #e8e8e8;
   border-color: #ffffff;
 }
 
@@ -43,7 +43,7 @@
 .button--danger:active {
   background: #ffffff;
   border-color: #ffffff;
-  /* color: #bf8585; */
+  color: #1a1a1b;
 }
 
 .button:disabled,

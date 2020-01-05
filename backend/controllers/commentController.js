@@ -40,7 +40,7 @@ exports.deleteComment = catchAsync(async (req, res, next) => {
   const comment = await Comment.findById(req.params.id);
   const { userId } = req.body;
   // Check for post owner
-  console.log(comment);
+  // console.log(comment);
   if (comment.user._id.toString() === userId) {
     return res.status(401).json({ notauthorized: 'User not authorized' });
   }

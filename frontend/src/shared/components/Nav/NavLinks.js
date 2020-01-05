@@ -14,7 +14,13 @@ const NavLinks = props => {
           groups
         </NavLink>
       </li>
-
+      {auth.isLoggedIn && auth.isAdmin && (
+        <li>
+          <NavLink to="/admin" exact>
+            admin panel
+          </NavLink>
+        </li>
+      )}
       {!auth.isLoggedIn && (
         <li>
           <NavLink to="/login" exact>

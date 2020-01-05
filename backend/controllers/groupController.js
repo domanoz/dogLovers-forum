@@ -34,7 +34,7 @@ exports.getGroup = catchAsync(async (req, res, next) => {
 
 exports.getUserGroups = catchAsync(async (req, res, next) => {
   let filter = req.params.id;
-  console.log(req.params.id);
+  // console.log(req.params.id);
   if (req.params.id) filter = { members: { _id: req.params.id } };
   const groups = await Group.find(filter);
 
@@ -80,8 +80,8 @@ exports.addDog = catchAsync(async (req, res, next) => {
 
   group.members.unshift(req.user._id);
 
-  console.log(group);
-  console.log(req.user._id);
+  // console.log(group);
+  // console.log(req.user._id);
 
   // user.dogs.breed.unshift(groupName);
   // console.log(user);

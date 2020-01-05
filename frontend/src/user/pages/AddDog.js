@@ -23,7 +23,7 @@ const AddDog = props => {
     };
     fetchData();
   }, [sendRequest]);
-  console.log(loadedData);
+  // console.log(loadedData);
 
   return (
     <React.Fragment>
