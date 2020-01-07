@@ -23,7 +23,7 @@ const UserItem = props => {
 
     try {
       await sendRequest(
-        `http://localhost:8000/api/v1/users/unbanAccount/${props.id}`,
+        process.env.REACT_APP_BACKEND_URL + `/users/unbanAccount/${props.id}`,
         "PATCH",
         JSON.stringify({}),
         {
@@ -40,7 +40,7 @@ const UserItem = props => {
     // console.log("banning");
     try {
       await sendRequest(
-        `http://localhost:8000/api/v1/users/deleteAccount/${props.id}`,
+        process.env.REACT_APP_BACKEND_URL + `/users/deleteAccount/${props.id}`,
         "DELETE",
         JSON.stringify({}),
         {

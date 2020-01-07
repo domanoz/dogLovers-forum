@@ -4,6 +4,7 @@ import ProfileLayout from "./../components/ProfileLayout";
 import { useHttp } from "../../shared/hooks/http-hook";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
+
 import { AuthContext } from "./../../shared/context/auth-context";
 
 const Profile = props => {
@@ -17,7 +18,7 @@ const Profile = props => {
     const fetchData = async () => {
       try {
         const responsePostsData = await sendRequest(
-          `http://localhost:8000/api/v1/posts/me`,
+          process.env.REACT_APP_BACKEND_URL + `/posts/me`,
           "GET",
           JSON.stringify(),
           {
@@ -36,7 +37,7 @@ const Profile = props => {
     const fetchData = async () => {
       try {
         const responseUserData = await sendRequest(
-          `http://localhost:8000/api/v1/users/me`,
+          process.env.REACT_APP_BACKEND_URL + `/users/me`,
           "GET",
           JSON.stringify(),
           {
@@ -55,7 +56,7 @@ const Profile = props => {
     const fetchData = async () => {
       try {
         const responseGroupsData = await sendRequest(
-          `http://localhost:8000/api/v1/groups/me`,
+          process.env.REACT_APP_BACKEND_URL + `/groups/me`,
           "GET",
           JSON.stringify(),
           {

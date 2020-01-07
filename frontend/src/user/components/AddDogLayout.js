@@ -22,7 +22,7 @@ const AddDogLayout = props => {
     try {
       // console.log(id, groupName);
       await sendRequest(
-        "http://localhost:8000/api/v1/groups/addDog",
+        process.env.REACT_APP_BACKEND_URL + "/groups/addDog",
         "POST",
         JSON.stringify({
           id: id,
@@ -41,7 +41,7 @@ const AddDogLayout = props => {
     event.preventDefault();
     try {
       await sendRequest(
-        "http://localhost:8000/api/v1/groups/removeDog",
+        process.env.REACT_APP_BACKEND_URL + "/groups/removeDog",
         "POST",
         JSON.stringify({
           id: id,

@@ -15,7 +15,7 @@ const Admin = props => {
     const fetchData = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/v1/users`,
+          process.env.REACT_APP_BACKEND_URL + `/users`,
           "GET",
           JSON.stringify(),
           {

@@ -43,7 +43,7 @@ const UpdateUserData = () => {
     const fetchData = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/v1/users/me`,
+          process.env.REACT_APP_BACKEND_URL + `/users/me`,
           "GET",
           JSON.stringify(),
           {
@@ -76,7 +76,7 @@ const UpdateUserData = () => {
     event.preventDefault();
     try {
       await sendRequest(
-        `http://localhost:8000/api/v1/users/updateUserData`,
+        process.env.REACT_APP_BACKEND_URL + `/users/updateUserData`,
         "PATCH",
         JSON.stringify({
           name: formState.inputs.name.value,

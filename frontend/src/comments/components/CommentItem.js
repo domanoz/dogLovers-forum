@@ -12,10 +12,10 @@ import { useHttp } from "./../../shared/hooks/http-hook";
 import { AuthContext } from "./../../shared/context/auth-context";
 
 const CommentItem = props => {
-  if (props.user.avatar === undefined) {
-    props.user.avatar =
-      "https://images.pexels.com/photos/839011/pexels-photo-839011.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260";
-  }
+  // if (props.user.avatar === undefined) {
+  //   props.user.avatar =
+  //     "https://images.pexels.com/photos/839011/pexels-photo-839011.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260";
+  // }
   const history = useHistory();
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttp();
@@ -26,7 +26,7 @@ const CommentItem = props => {
 
     try {
       await sendRequest(
-        `http://localhost:8000/api/v1/comments/${props.id}`,
+        process.env.REACT_APP_BACKEND_URL + `/comments/${props.id}`,
         "DELETE",
         JSON.stringify({}),
         {
@@ -37,7 +37,7 @@ const CommentItem = props => {
       history.goBack();
     } catch (err) {}
   };
-  // console.log(props.group, props.id);
+  // console.log(props.user);
 
   return (
     <React.Fragment>

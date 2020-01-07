@@ -20,7 +20,8 @@ const Post = props => {
     const fetchData = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/v1/groups/${groupId}/posts/${postId}`
+          process.env.REACT_APP_BACKEND_URL +
+            `/groups/${groupId}/posts/${postId}`
         );
 
         setLoadedData(responseData.data.post);

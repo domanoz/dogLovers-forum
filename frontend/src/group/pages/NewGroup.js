@@ -33,7 +33,7 @@ const NewGroup = props => {
 
     try {
       await sendRequest(
-        `http://localhost:8000/api/v1/groups/`,
+        process.env.REACT_APP_BACKEND_URL + `/groups/`,
         "POST",
         JSON.stringify({
           name: formState.inputs.name.value

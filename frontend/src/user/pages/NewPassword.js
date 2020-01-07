@@ -44,7 +44,7 @@ const NewPassword = props => {
     event.preventDefault();
     try {
       await sendRequest(
-        "http://localhost:8000/api/v1/users/changePassword",
+        process.env.REACT_APP_BACKEND_URL + "/users/changePassword",
         "PATCH",
         JSON.stringify({
           currentPassword: formState.inputs.currentPassword.value,

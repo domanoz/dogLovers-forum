@@ -1,3 +1,4 @@
+const fs = require('fs');
 const AppError = require('./../utils/appError');
 
 const handleCastErrorDB = err => {
@@ -50,7 +51,11 @@ const sendProdError = (err, res) => {
 module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || 'error';
-
+  if (req.file) {
+    fs.unlink(req.file.path, err => {
+      // console.log(err);
+    });
+  }
   if (process.env.NODE_ENV === 'development') {
     sendDevError(err, res);
   } else if (process.env.NODE_ENV === 'production') {

@@ -40,7 +40,7 @@ const UpdatePost = () => {
     const fetchData = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/v1/posts/${postId}`
+          process.env.REACT_APP_BACKEND_URL + `/posts/${postId}`
         );
 
         setLoadedPost(responseData.data.post);
@@ -67,7 +67,7 @@ const UpdatePost = () => {
     event.preventDefault();
     try {
       await sendRequest(
-        `http://localhost:8000/api/v1/posts/update/${postId}`,
+        process.env.REACT_APP_BACKEND_URL + `/posts/update/${postId}`,
         "PATCH",
         JSON.stringify({
           title: formState.inputs.title.value,

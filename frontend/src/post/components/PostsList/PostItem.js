@@ -23,7 +23,7 @@ const PostItem = props => {
 
     try {
       await sendRequest(
-        `http://localhost:8000/api/v1/posts/${props.postId}`,
+        process.env.REACT_APP_BACKEND_URL + `/posts/${props.postId}`,
         "DELETE",
         JSON.stringify({}),
         {

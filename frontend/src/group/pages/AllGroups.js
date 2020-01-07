@@ -15,7 +15,7 @@ const AllGroups = props => {
     const fetchData = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/v1/groups/`
+          process.env.REACT_APP_BACKEND_URL + `/groups/`
         );
 
         setLoadedData(responseData.data.groups);

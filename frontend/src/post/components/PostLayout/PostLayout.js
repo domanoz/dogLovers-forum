@@ -19,17 +19,17 @@ const PostLayout = props => {
   const { isLoading, error, sendRequest, clearError } = useHttp();
   const storedData = JSON.parse(localStorage.getItem("userData"));
 
-  if (props.post.avatar === undefined) {
-    props.post.avatar =
-      "https://images.pexels.com/photos/839011/pexels-photo-839011.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260";
-  }
+  // if (props.post.avatar === undefined) {
+  //   props.post.avatar =
+  //     "https://images.pexels.com/photos/839011/pexels-photo-839011.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260";
+  // }
 
   const deletePost = async event => {
     event.preventDefault();
 
     try {
       await sendRequest(
-        `http://localhost:8000/api/v1/posts/${props.post.id}`,
+        process.env.REACT_APP_BACKEND_URL + `/posts/${props.post.id}`,
         "DELETE",
         JSON.stringify({}),
         {
@@ -73,7 +73,7 @@ const PostLayout = props => {
           />
           <div className="postlayout-item__image">
             <Avatar
-              image={props.post.avatar}
+              image={props.post.user.avatar}
               alt={props.post.title}
               width="3rem"
             />
@@ -88,7 +88,7 @@ const PostLayout = props => {
             </div>
           </div>
         </Card>
-        <CommentsList post={props.post} />
+        <CommentsList post={props.post} user_avatar={props.post.user.avatar} />
       </div>
     </React.Fragment>
   );

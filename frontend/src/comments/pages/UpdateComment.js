@@ -33,7 +33,7 @@ const UpdateComment = () => {
     const fetchData = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/v1/comments/${commentId}`
+          process.env.REACT_APP_BACKEND_URL + `/comments/${commentId}`
         );
 
         setLoadedComment(responseData.data.comment);
@@ -56,7 +56,7 @@ const UpdateComment = () => {
     event.preventDefault();
     try {
       await sendRequest(
-        `http://localhost:8000/api/v1/comments/update/${commentId}`,
+        process.env.REACT_APP_BACKEND_URL + `/comments/update/${commentId}`,
         "PATCH",
         JSON.stringify({
           text: formState.inputs.text.value

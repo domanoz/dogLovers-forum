@@ -46,10 +46,10 @@ const PostsList = props => {
         {props.items.group
           ? props.items.group.posts.map(post => {
               // console.log(props.items.group);
-              if (post.avatar === undefined) {
-                post.avatar =
-                  "https://images.pexels.com/photos/839011/pexels-photo-839011.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260";
-              }
+              // if (post.avatar === undefined) {
+              //   post.avatar =
+              //     "https://images.pexels.com/photos/839011/pexels-photo-839011.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260";
+              // }
               return (
                 <div className="singlePost" key={post.id}>
                   <LikesItem
@@ -70,7 +70,7 @@ const PostsList = props => {
                       postId={post.id}
                       title={post.title}
                       text={post.text}
-                      image={post.avatar}
+                      image={post.user.avatar}
                       likes={post.likes}
                       date={post.date}
                       comments={post.comments}
@@ -82,10 +82,10 @@ const PostsList = props => {
             })
           : props.items.posts.map(post => {
               // console.log(props.items.group);
-              if (post.avatar === undefined) {
-                post.avatar =
-                  "https://images.pexels.com/photos/839011/pexels-photo-839011.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260";
-              }
+              // if (post.avatar === undefined) {
+              //   post.avatar =
+              //     "https://images.pexels.com/photos/839011/pexels-photo-839011.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260";
+              // }
               return (
                 <div className="singlePost" key={post.id}>
                   <LikesItem
@@ -106,7 +106,7 @@ const PostsList = props => {
                       postId={post.id}
                       title={post.title}
                       text={post.text}
-                      image={post.avatar}
+                      image={post.user.avatar}
                       likes={post.likes}
                       date={post.date}
                       comments={post.comments}

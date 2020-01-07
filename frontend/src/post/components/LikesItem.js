@@ -21,7 +21,7 @@ const LikesItem = props => {
       event.preventDefault();
       try {
         await sendRequest(
-          `http://localhost:8000/api/v1/posts/unlike/${props.postId}`,
+          process.env.REACT_APP_BACKEND_URL + `/posts/unlike/${props.postId}`,
           "POST",
           JSON.stringify({}),
           {
@@ -36,7 +36,7 @@ const LikesItem = props => {
       event.preventDefault();
       try {
         await sendRequest(
-          `http://localhost:8000/api/v1/posts/like/${props.postId}`,
+          process.env.REACT_APP_BACKEND_URL + `/posts/like/${props.postId}`,
           "POST",
           JSON.stringify({ userId: auth.userId }),
           {

@@ -39,7 +39,7 @@ const Login = props => {
     event.preventDefault();
     try {
       const responseData = await sendRequest(
-        "http://localhost:8000/api/v1/users/login",
+        process.env.REACT_APP_BACKEND_URL + "/users/login",
         "POST",
         JSON.stringify({
           email: formState.inputs.email.value,

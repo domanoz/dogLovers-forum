@@ -35,7 +35,7 @@ const ResetPassword = props => {
     event.preventDefault();
     try {
       const responseData = await sendRequest(
-        `http://localhost:8000/api/v1/users/resetPassword/${token}`,
+        process.env.REACT_APP_BACKEND_URL + `/users/resetPassword/${token}`,
         "PATCH",
         JSON.stringify({
           password: formState.inputs.password.value,

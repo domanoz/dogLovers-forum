@@ -7,6 +7,8 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const cors = require('cors');
 
+const path = require('path');
+
 const userRouter = require('./routes/userRoutes');
 const groupRouter = require('./routes/groupRoutes');
 const postRouter = require('./routes/postRoutes');
@@ -50,6 +52,8 @@ app.use(
 //   req.requestTime = new Date().toISOString();
 //   next();
 // });
+
+app.use('/uploads/images', express.static(path.join('uploads', 'images')));
 
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/groups', groupRouter);

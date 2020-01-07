@@ -37,11 +37,12 @@ exports.signup = catchAsync(async (req, res) => {
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
+    avatar: process.env.IMAGE_PATH + req.file.filename,
     confirmPassword: req.body.confirmPassword,
     passwordChangedAt: req.body.passwordChangedAt
   });
 
-  createAndSendToken(newUser, 201, res);
+  createAndSendToken(newUser, 200, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -61,7 +62,7 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError('Invalid email or password', 401));
   }
 
-  createAndSendToken(user, 200, res);
+  createAndSendToken(user, 201, res);
 });
 
 exports.protectRoutes = catchAsync(async (req, res, next) => {

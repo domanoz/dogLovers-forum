@@ -7,13 +7,12 @@ import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 const Group = props => {
   const { isLoading, error, sendRequest, clearError } = useHttp();
   const [loadedData, setLoadedData] = useState();
-  //5df10b93ace1b1037cf2f752
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/v1/groups/5df10b93ace1b1037cf2f752`
+          process.env.REACT_APP_BACKEND_URL + `/groups/5e13c662b89d18165456c578`
         );
 
         setLoadedData(responseData.data);

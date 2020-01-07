@@ -34,7 +34,7 @@ const ForgotPassword = props => {
     event.preventDefault();
     try {
       await sendRequest(
-        "http://localhost:8000/api/v1/users/forgotPassword",
+        process.env.REACT_APP_BACKEND_URL + "/users/forgotPassword",
         "POST",
         JSON.stringify({
           email: formState.inputs.email.value

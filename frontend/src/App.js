@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { Suspense, useState, useCallback, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -6,28 +6,48 @@ import {
   Switch
 } from "react-router-dom";
 
-import Group from "./group/pages/Group";
+// import Group from "./group/pages/Group";
 import MainPage from "./group/pages/MainPage";
-import AllGroups from "./group/pages/AllGroups";
-import NewGroup from "./group/pages/NewGroup";
-import Post from "./post/pages/Post";
-import NewPost from "./post/pages/NewPost";
-import UpdatePost from "./post/pages/UpdatePost";
-import NewComment from "./comments/pages/NewComment";
-import UpdateComment from "./comments/pages/UpdateComment";
-import ForgotPassword from "./user/pages/ForgotPassword";
-import Profile from "./user/pages/Profile";
-import UpdateUserData from "./user/pages/UpdateUserData";
-import ResetPassword from "./user/pages/ResetPassword";
-import Admin from "./admin/pages/Admin";
-import NewPassword from "./user/pages/NewPassword";
-import AddDog from "./user/pages/AddDog";
+// import AllGroups from "./group/pages/AllGroups";
+// import NewGroup from "./group/pages/NewGroup";
+// import Post from "./post/pages/Post";
+// import NewPost from "./post/pages/NewPost";
+// import UpdatePost from "./post/pages/UpdatePost";
+// import NewComment from "./comments/pages/NewComment";
+// import UpdateComment from "./comments/pages/UpdateComment";
+// import ForgotPassword from "./user/pages/ForgotPassword";
+// import Profile from "./user/pages/Profile";
+// import UpdateUserData from "./user/pages/UpdateUserData";
+// import ResetPassword from "./user/pages/ResetPassword";
+// import Admin from "./admin/pages/Admin";
+// import NewPassword from "./user/pages/NewPassword";
+// import AddDog from "./user/pages/AddDog";
 
-import Login from "./user/pages/Login";
+// import Login from "./user/pages/Login";
 import Signup from "./user/pages/Signup";
 import MainNavigation from "./shared/components/Nav/MainNavigation";
 
 import { AuthContext } from "./shared/context/auth-context";
+import LoadingSpinner from "./shared/components/UIElements/LoadingSpinner";
+
+const Group = React.lazy(() => import("./group/pages/Group"));
+const AllGroups = React.lazy(() => import("./group/pages/AllGroups"));
+const NewGroup = React.lazy(() => import("./group/pages/NewGroup"));
+const Post = React.lazy(() => import("./post/pages/Post"));
+const NewPost = React.lazy(() => import("./post/pages/NewPost"));
+const UpdatePost = React.lazy(() => import("./post/pages/UpdatePost"));
+const NewComment = React.lazy(() => import("./comments/pages/NewComment"));
+const UpdateComment = React.lazy(() =>
+  import("./comments/pages/UpdateComment")
+);
+const ForgotPassword = React.lazy(() => import("./user/pages/ForgotPassword"));
+const Profile = React.lazy(() => import("./user/pages/Profile"));
+const UpdateUserData = React.lazy(() => import("./user/pages/UpdateUserData"));
+const ResetPassword = React.lazy(() => import("./user/pages/ResetPassword"));
+const Admin = React.lazy(() => import("./admin/pages/Admin"));
+const NewPassword = React.lazy(() => import("./user/pages/NewPassword"));
+const AddDog = React.lazy(() => import("./user/pages/AddDog"));
+const Login = React.lazy(() => import("./user/pages/Login"));
 
 let logoutTimer;
 
@@ -195,7 +215,17 @@ const App = () => {
     >
       <Router>
         <MainNavigation />
-        <main>{routes}</main>
+        <main>
+          <Suspense
+            fallback={
+              <div className="center">
+                <LoadingSpinner />
+              </div>
+            }
+          >
+            {routes}
+          </Suspense>
+        </main>
       </Router>
     </AuthContext.Provider>
   );

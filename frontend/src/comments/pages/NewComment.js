@@ -46,7 +46,8 @@ const NewComment = props => {
 
     try {
       await sendRequest(
-        `http://localhost:8000/api/v1/groups/${groupId}/posts/${postId}/comments`,
+        process.env.REACT_APP_BACKEND_URL +
+          `/groups/${groupId}/posts/${postId}/comments`,
         "POST",
         JSON.stringify({
           title: formState.inputs.title.value,

@@ -35,10 +35,10 @@ const UsersList = props => {
       ) : null}
       <ul className="users-list">
         {props.users.map(user => {
-          if (user.avatar === undefined) {
-            user.avatar =
-              "https://images.pexels.com/photos/839011/pexels-photo-839011.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260";
-          }
+          // if (user.avatar === undefined) {
+          //   user.avatar =
+          //     "https://images.pexels.com/photos/839011/pexels-photo-839011.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260";
+          // }
           return (
             <UserItem
               key={user._id}

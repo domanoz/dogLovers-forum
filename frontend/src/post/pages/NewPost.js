@@ -43,7 +43,7 @@ const NewPost = props => {
     const fetchData = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/v1/groups/${groupId}`
+          process.env.REACT_APP_BACKEND_URL + `/groups/${groupId}`
         );
 
         setLoadedData(responseData.data.group.name);
@@ -58,7 +58,7 @@ const NewPost = props => {
 
     try {
       await sendRequest(
-        `http://localhost:8000/api/v1/groups/${groupId}/posts`,
+        process.env.REACT_APP_BACKEND_URL + `/groups/${groupId}/posts`,
         "POST",
         JSON.stringify({
           title: formState.inputs.title.value,
