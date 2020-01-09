@@ -12,7 +12,7 @@ const Group = props => {
     const fetchData = async () => {
       try {
         const responseData = await sendRequest(
-          process.env.REACT_APP_BACKEND_URL + `/groups/5e13c662b89d18165456c578`
+          process.env.REACT_APP_BACKEND_URL + `/groups/5e1290c7d7ccf61190f5ae81`
         );
 
         setLoadedData(responseData.data);

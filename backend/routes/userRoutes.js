@@ -29,6 +29,7 @@ router.post('/login', authController.login);
 router.patch(
   '/updateUserData',
   authController.protectRoutes,
+  userController.fileUpload.single('image'),
   userController.updateDataForAuthUser
 );
 

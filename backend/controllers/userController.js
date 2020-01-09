@@ -3,6 +3,7 @@ const User = require('./../models/userModel');
 const AppError = require('./../utils/appError');
 const multer = require('multer');
 const uuid = require('uuid/v1');
+const fs = require('fs');
 
 const MIME_TYPE_MAP = {
   'image/png': 'png',
@@ -40,9 +41,17 @@ exports.updateDataForAuthUser = catchAsync(async (req, res, next) => {
   if (req.user.password || req.user.confirmPassword) {
     return next(new AppError('You cant change password here!', 400));
   }
-
+  // console.log(req.file.path);
+  console.log(req.user.avatar);
+  if (req.body.avatar) {
+    fs.unlink(req.user.avatar, err => {
+      // console.log(err);
+    });
+  }
   //filter the req body to not allow user to change for example role
-  const filter = filterReqBody(req.body, 'name', 'email');
+  if (req.body.avatar)
+    req.body.avatar = process.env.IMAGE_PATH + req.file.filename;
+  const filter = filterReqBody(req.body, 'name', 'email', 'avatar');
 
   const user = await User.findByIdAndUpdate(req.user.id, filter, {
     new: true,

@@ -6,6 +6,7 @@ import Button from "./../../shared/components/FormElements/Button";
 import Card from "./../../shared/components/UIElements/Card";
 import LoadingSpinner from "./../../shared/components/UIElements/LoadingSpinner";
 import ErrorModal from "./../../shared/components/UIElements/ErrorModal";
+import ImageUpload from "../../shared/components/FormElements/ImageUpload";
 
 import {
   VALIDATOR_REQUIRE,
@@ -33,6 +34,10 @@ const UpdateUserData = () => {
       },
       email: {
         value: "",
+        isValid: false
+      },
+      image: {
+        value: null,
         isValid: false
       }
     },
@@ -62,6 +67,10 @@ const UpdateUserData = () => {
             email: {
               value: responseData.data.email,
               isValid: true
+            },
+            image: {
+              value: null,
+              isValid: true
             }
           },
           true
@@ -75,15 +84,16 @@ const UpdateUserData = () => {
   const userUpdateSubmitHandler = async event => {
     event.preventDefault();
     try {
+      const formData = new FormData();
+      formData.append("email", formState.inputs.email.value);
+      formData.append("name", formState.inputs.name.value);
+      formData.append("image", formState.inputs.image.value);
+
       await sendRequest(
         process.env.REACT_APP_BACKEND_URL + `/users/updateUserData`,
         "PATCH",
-        JSON.stringify({
-          name: formState.inputs.name.value,
-          email: formState.inputs.email.value
-        }),
+        formData,
         {
-          "Content-Type": "application/json",
           Authorization: "Bearer " + auth.token
         }
       );
@@ -136,6 +146,7 @@ const UpdateUserData = () => {
             initialValue={loadedUser.email}
             initialValid={true}
           />
+          <ImageUpload center id="image" onInput={inputHandler} />
           <Button type="submit" disabled={!formState.isValid}>
             UPDATE USER DATA
           </Button>
