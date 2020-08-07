@@ -20,7 +20,7 @@ Stack technologiczny MERN:
 Przykładowa strona:<br />
 https://doglovers-dd3c5.web.app/
 
-Z powodu darmowych planów na heroku oraz firebase, działa wolno ale można poznać podstawowe funkcjonalności.
+Z powodu darmowych planów na heroku oraz firebase, działa wolno oraz kasuje dodane zdjęcia po 30 minutach ale można poznać podstawowe funkcjonalności.
 
 # TODO
 
