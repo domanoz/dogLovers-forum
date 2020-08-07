@@ -6,7 +6,7 @@ import Button from "./../../shared/components/FormElements/Button";
 import Card from "./../../shared/components/UIElements/Card";
 import LoadingSpinner from "./../../shared/components/UIElements/LoadingSpinner";
 import ErrorModal from "./../../shared/components/UIElements/ErrorModal";
-import ImageUpload from "../../shared/components/FormElements/ImageUpload";
+//import ImageUpload from "../../shared/components/FormElements/ImageUpload";
 
 import {
   VALIDATOR_REQUIRE,
@@ -146,7 +146,7 @@ const UpdateUserData = () => {
             initialValue={loadedUser.email}
             initialValid={true}
           />
-          <ImageUpload center id="image" onInput={inputHandler} />
+          //<ImageUpload center id="image" onInput={inputHandler} />
           <Button type="submit" disabled={!formState.isValid}>
             UPDATE USER DATA
           </Button>
